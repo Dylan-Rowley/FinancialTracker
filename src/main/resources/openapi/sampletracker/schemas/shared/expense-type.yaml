@@ -1,0 +1,7 @@
+openapi: 3.0.3
+components:
+  schemas:
+    ExpenseType:
+      description: Defines the type of an income
+      type: string
+      enum: [RENT, MORTGAGE, TAX, GROCERIES, LOAN, INSURANCE, VACATION, OTHER]

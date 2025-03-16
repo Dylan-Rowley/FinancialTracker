@@ -1,0 +1,27 @@
+openapi: 3.0.3
+paths:
+  /api/v1/income/fixed:
+    post:
+      summary: Create a fixed income
+      operationId: createFixedIncome
+      tags:
+        - Income
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './create-fixed-income-request.yaml#/components/schemas/CreateFixedIncomeRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: './create-fixed-income-response.yaml#/components/schemas/CreateFixedIncomeResponse'
+        '400':
+          description: BAD REQUEST
+          content:
+            application/json:
+              schema:
+                type: string

@@ -1,0 +1,32 @@
+openapi: 3.0.3
+paths:
+  /api/v1/income/custom:
+    post:
+      summary: Create a custom income
+      description: > 
+        This API should be used when the income repeats several times with each occurrence
+        having a different income value. If you have an expense that occurs several times, but each occurrence is at the
+        same interval and for the same amount, use the fixed income type with the right occurrence - DAILY, WEEKLY, MONTHLY, YEARLY.
+        An example
+      operationId: createCustomIncome
+      tags:
+        - Income
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './create-custom-income-request.yaml#/components/schemas/CreateCustomIncomeRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: './create-custom-income-response.yaml#/components/schemas/CreateCustomIncomeResponse'
+        '400':
+          description: BAD REQUEST
+          content:
+            application/json:
+              schema:
+                type: string

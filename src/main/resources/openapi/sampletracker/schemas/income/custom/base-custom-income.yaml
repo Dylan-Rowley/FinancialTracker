@@ -1,0 +1,16 @@
+openapi: 3.0.3
+components:
+  schemas:
+    BaseCustomIncome:
+      description: A transport object that represents an income.
+      type: object
+      properties:
+        incomeName:
+          type: string
+        incomeType:
+          type: string
+          $ref: '../../shared/income-type.yaml#/components/schemas/IncomeType'
+        specifiedOccurrences:
+          type: array
+          items:
+            $ref: '../../shared/specified-occurrence.yaml#/components/schemas/SpecifiedOccurrence'

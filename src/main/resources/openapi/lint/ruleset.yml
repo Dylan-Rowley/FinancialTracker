@@ -1,0 +1,19 @@
+#Spectral Linter rule file.
+#Doc: https://docs.stoplight.io/docs/spectral/01baf06bdd05a-create-a-ruleset
+#Install Spectral IDE plugin and refer to this file on its config.
+
+extends:
+  #Required by Spectral plugin.
+  - "spectral:oas"
+  #Name: OWASP Top 10
+  #Function: Security checks
+  #Doc: https://github.com/stoplightio/spectral-owasp-ruleset
+  - "https://unpkg.com/@stoplight/spectral-owasp-ruleset/dist/ruleset.mjs"
+  #Name: Documentation
+  #Function: Enforce minimal documentation
+  #Doc: https://github.com/stoplightio/spectral-documentation
+  - "https://unpkg.com/@stoplight/spectral-documentation/dist/ruleset.mjs"
+  #Name: Versioning
+  #Function: Enforce versioning guidelines
+  #Doc: https://github.com/stoplightio/spectral-url-versioning
+  - "https://unpkg.com/@stoplight/spectral-url-versioning/dist/ruleset.mjs"

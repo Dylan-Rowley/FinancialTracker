@@ -1,0 +1,8 @@
+openapi: 3.0.3
+components:
+  schemas:
+    CreateCustomIncomeResponse:
+      description: A transport object that carries the details for a newly created custom income.
+      type: object
+      allOf:
+        - $ref: '../../../schemas/income/custom/base-custom-income.yaml'

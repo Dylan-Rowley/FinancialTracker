@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.4.3</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+  <groupId>rowley.dylan</groupId>
+  <artifactId>SampleTracker</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Finance Tracker</name>
+  <description>Finance Tracker</description>
+  <url/>
+
+  <properties>
+    <java.version>21</java.version>
+    <spotless.version>2.39.0</spotless.version>
+    <palantirJavaFormat.version>2.38.0</palantirJavaFormat.version>
+    <oas.codegen.package.base>rowley.dylan.oas</oas.codegen.package.base>
+    <openapi-generator-maven-plugin.version>7.5.0</openapi-generator-maven-plugin.version>
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+      <version>3.3.4</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>io.swagger.core.v3</groupId>
+      <artifactId>swagger-annotations</artifactId>
+      <version>2.2.28</version>
+    </dependency>
+
+    <dependency>
+      <groupId>jakarta.validation</groupId>
+      <artifactId>jakarta.validation-api</artifactId>
+      <version>3.1.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openapitools</groupId>
+      <artifactId>jackson-databind-nullable</artifactId>
+      <version>0.2.6</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webflux</artifactId>
+      <version>6.2.3</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.7.5</version>
+    </dependency>
+
+    <!--	Review - Has CVEs 	-->
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-core</artifactId>
+      <version>1.14.4</version>
+    </dependency>
+
+    <!--	Review - Has CVEs 	-->
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>testcontainers</artifactId>
+      <version>1.20.5</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>1.20.5</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.27.3</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.24.3</version>
+    </dependency>
+
+
+  </dependencies>
+
+  <build>
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+
+
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <excludes>
+            <exclude>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+            </exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>${spotless.version}</version>
+        <configuration>
+          <java>
+            <removeUnusedImports/>
+            <palantirJavaFormat>
+              <version>${palantirJavaFormat.version}</version>
+              <style>PALANTIR</style>
+            </palantirJavaFormat>
+          </java>
+        </configuration>
+        <executions>
+          <execution>
+            <id>Spotless-Check</id>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <phase>verify</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+
+      <plugin>
+        <!-- https://github.com/kpramesh2212/openapi-merger-plugin/ -->
+        <groupId>com.rameshkp</groupId>
+        <artifactId>openapi-merger-maven-plugin</artifactId>
+        <version>1.0.5</version>
+        <executions>
+          <execution>
+            <id>sample-tracker-spec-merger</id>
+            <goals>
+              <goal>merge</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <inputDir>src/main/resources/openapi/financetracker</inputDir>
+              <outputDir>${project.basedir}/src/main/resources/openapi/financetracker</outputDir>
+              <outputFileName>sample-tracker-api</outputFileName>
+              <openApi>
+                <version>3.0.3</version>
+                <info>
+                  <version>0.6.0</version>
+                  <title>FinanceTracker API</title>
+                </info>
+              </openApi>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <version>${openapi-generator-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>openapi-generate-sample-tracker-api</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <!-- doc: https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator-maven-plugin -->
+            <configuration>
+              <!-- IO options -->
+              <inputSpec>${project.basedir}/src/main/resources/openapi/sampletracker/finance-tracker-api.yaml</inputSpec>
+              <output>${project.build.directory}/generated-sources/openapi</output>
+              <!-- NEW, UNDOCUMENTED: Cleanup the output folder before generation. Avoids old files. -->
+              <cleanupOutput>true</cleanupOutput>
+              <generatorName>spring</generatorName>
+
+              <verbose>false</verbose>
+              <logToStderr>true</logToStderr>
+              <skipOverwrite>false</skipOverwrite>
+              <skipIfSpecIsUnchanged>false</skipIfSpecIsUnchanged>
+              <skipValidateSpec>false</skipValidateSpec>
+              <strictSpec>false</strictSpec>
+
+              <!-- Package options -->
+              <packageName>${oas.codegen.package.base}</packageName>
+              <apiPackage>${oas.codegen.package.base}.api</apiPackage>
+              <modelPackage>${oas.codegen.package.base}.model</modelPackage>
+              <invokerPackage>${oas.codegen.package.base}.invoker</invokerPackage>
+
+              <!-- Generation options -->
+              <generateApis>true</generateApis>
+              <generateApiTests>true</generateApiTests>
+              <generateApiDocumentation>true</generateApiDocumentation>
+              <apiNameSuffix>Api</apiNameSuffix>
+
+              <generateModels>true</generateModels>
+              <generateModelTests>true</generateModelTests>
+              <generateModelDocumentation>true</generateModelDocumentation>
+              <modelNameSuffix>DTO</modelNameSuffix>
+
+              <generateSupportingFiles>true</generateSupportingFiles>
+
+              <!-- Generator Specific options -->
+              <!-- doc: https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/spring.md -->
+              <configOptions>
+                <useSpringBoot3>true</useSpringBoot3>
+                <useTags>true</useTags>
+                <interfaceOnly>true</interfaceOnly>
+                <skipDefaultInterface>false</skipDefaultInterface>
+                <useBeanValidation>true</useBeanValidation>
+                <openapiNormalizer>REF_AS_PARENT_IN_ALLOF=true</openapiNormalizer>
+              </configOptions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+
+  </build>
+
+
+</project>

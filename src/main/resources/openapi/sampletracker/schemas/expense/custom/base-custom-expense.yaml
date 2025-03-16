@@ -1,0 +1,25 @@
+openapi: 3.0.3
+components:
+  schemas:
+    BaseCustomExpense:
+      description: >
+        A transport object that represents a custom expense.
+        This should be used when the expense repeats several times with each occurrence 
+        having a different value. If you have an expense that occurs several times, but each occurrence is at the
+        same interval and for the same amount, use the fixed income type with the right occurrence - DAILY, WEEKLY, MONTHLY, YEARLY
+      type: object
+      properties:
+        expenseName:
+          type: string
+        value:
+          type: number
+          format: int64;
+        expenseOccurrence:
+          $ref: '../shared/occurrence.yaml#/components/schemas/Occurrence'
+        expenseType:
+          type: string
+          $ref: '../../shared/expense-type.yaml#/components/schemas/ExpenseType'
+        specifiedOccurrences:
+          type: array
+          items:
+            $ref: '../shared/specified-occurrence.yaml#/components/schemas/SpecifiedOccurrence'

@@ -1,0 +1,14 @@
+openapi: 3.0.3
+components:
+  schemas:
+    SpecifiedOccurrence:
+      description: Defines the attributes of a given occurrence when the occurence type of an income/expense is CUSTOM
+      type: object
+      properties:
+        value:
+          type: number
+          format: float
+        occurringOn:
+          type: string
+          description: A UTC, ISO8601 compliant date & time
+          example: 2022-12-12 18:00:00:00.000

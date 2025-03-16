@@ -1,0 +1,7 @@
+openapi: 3.0.3
+components:
+  schemas:
+    Occurrence:
+      description: Defines the occurrence of an income
+      type: string
+      enum: [DAILY, WEEKLY, MONTHLY, YEARLY, QUARTERLY, CUSTOM]

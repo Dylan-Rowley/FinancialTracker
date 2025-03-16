@@ -1,0 +1,7 @@
+openapi: 3.0.3
+components:
+  schemas:
+    IncomeType:
+      description: Defines the type of an income
+      type: string
+      enum: [SALARY, DIVIDEND, RENT, INTEREST, OTHER]

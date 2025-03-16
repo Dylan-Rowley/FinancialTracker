@@ -1,0 +1,17 @@
+openapi: 3.0.3
+components:
+  schemas:
+    BaseFixedExpense:
+      description: A transport object that represents an expense.
+      type: object
+      properties:
+        expenseName:
+          type: string
+        value:
+          type: number
+          format: int64;
+        expenseType:
+          type: string
+          $ref: '../../shared/expense-type.yaml#/components/schemas/ExpenseType'
+        expenseOccurrence:
+          $ref: '../../shared/occurrence.yaml#/components/schemas/Occurrence'
