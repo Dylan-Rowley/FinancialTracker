@@ -1,9 +1,9 @@
 package rowley.dylan.financetracker.income.api.adapter;
 
 import org.springframework.stereotype.Component;
-import rowley.dylan.financetracker.income.service.commands.CreateCustomIncomeCommand;
-import rowley.dylan.financetracker.income.service.commands.CreateFixedIncomeCommand;
-import rowley.dylan.financetracker.income.service.results.CreateFixedIncomeResult;
+import rowley.dylan.financetracker.income.service.custom.commands.CreateCustomIncomeCommand;
+import rowley.dylan.financetracker.income.service.fixed.commands.CreateFixedIncomeCommand;
+import rowley.dylan.financetracker.income.service.fixed.results.CreateFixedIncomeResult;
 import rowley.dylan.financetracker.shared.IncomeType;
 import rowley.dylan.financetracker.shared.Occurrence;
 import rowley.dylan.oas.model.CreateCustomIncomeRequestDTO;
@@ -27,7 +27,8 @@ public class IncomeRequestAdapter {
     return null;
   }
 
-  public CreateFixedIncomeResponseDTO createFixedIncomeResultToResponse(CreateFixedIncomeResult incomeResult) {
+  public CreateFixedIncomeResponseDTO createFixedIncomeResultToResponse(
+      CreateFixedIncomeResult incomeResult) {
     return null;
   }
 }
