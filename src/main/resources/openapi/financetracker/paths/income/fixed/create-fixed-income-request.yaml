@@ -5,4 +5,4 @@ components:
       description: A transport object that carries the details for creating a new fixed income.
       type: object
       allOf:
-        - $ref: '../../../schemas/income/fixed/base-fixed-income.yaml'
+        - $ref: '../../../schemas/income/fixed/base-fixed-income.yaml#/components/schemas/BaseFixedIncome'

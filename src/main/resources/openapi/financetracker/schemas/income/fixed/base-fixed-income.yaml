@@ -7,12 +7,11 @@ components:
       properties:
         incomeName:
           type: string
+        incomeValue:
+          type: number
+          format: double
         incomeType:
           type: string
           $ref: '../../shared/income-type.yaml#/components/schemas/IncomeType'
         incomeOccurrence:
           $ref: '../../shared/occurrence.yaml#/components/schemas/Occurrence'
-        specifiedOccurrences:
-          type: array
-          items:
-            $ref: '../../shared/specified-occurrence.yaml#/components/schemas/SpecifiedOccurrence'

@@ -11,15 +11,10 @@ components:
       properties:
         expenseName:
           type: string
-        value:
-          type: number
-          format: int64;
-        expenseOccurrence:
-          $ref: '../shared/occurrence.yaml#/components/schemas/Occurrence'
         expenseType:
           type: string
           $ref: '../../shared/expense-type.yaml#/components/schemas/ExpenseType'
         specifiedOccurrences:
           type: array
           items:
-            $ref: '../shared/specified-occurrence.yaml#/components/schemas/SpecifiedOccurrence'
+            $ref: '../../shared/specified-occurrence.yaml#/components/schemas/SpecifiedOccurrence'

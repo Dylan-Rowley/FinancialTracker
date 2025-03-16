@@ -7,7 +7,7 @@ components:
       properties:
         value:
           type: number
-          format: float
+          format: double
         occurringOn:
           type: string
           description: A UTC, ISO8601 compliant date & time

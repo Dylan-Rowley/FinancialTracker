@@ -1,0 +1,189 @@
+openapi: 3.0.3
+info:
+  title: FinanceTracker API
+  version: 0.6.0
+servers:
+- url: /
+paths:
+  /api/v1/income/custom:
+    post:
+      tags:
+      - Income
+      summary: Create a custom income
+      description: "This API should be used when the income repeats several times\
+        \ with each occurrence having a different income value. If you have an expense\
+        \ that occurs several times, but each occurrence is at the same interval and\
+        \ for the same amount, use the fixed income type with the right occurrence\
+        \ - DAILY, WEEKLY, MONTHLY, YEARLY. An example\n"
+      operationId: createCustomIncome
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCustomIncomeRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCustomIncomeResponse'
+        "400":
+          description: BAD REQUEST
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/income/fixed:
+    post:
+      tags:
+      - Income
+      summary: Create a fixed income
+      operationId: createFixedIncome
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFixedIncomeRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateFixedIncomeResponse'
+        "400":
+          description: BAD REQUEST
+          content:
+            application/json:
+              schema:
+                type: string
+components:
+  schemas:
+    BaseCustomExpense:
+      type: object
+      properties:
+        expenseName:
+          type: string
+        expenseType:
+          $ref: '#/components/schemas/ExpenseType'
+        specifiedOccurrences:
+          type: array
+          items:
+            $ref: '#/components/schemas/SpecifiedOccurrence'
+      description: "A transport object that represents a custom expense. This should\
+        \ be used when the expense repeats several times with each occurrence  having\
+        \ a different value. If you have an expense that occurs several times, but\
+        \ each occurrence is at the same interval and for the same amount, use the\
+        \ fixed income type with the right occurrence - DAILY, WEEKLY, MONTHLY, YEARLY\n"
+    BaseCustomIncome:
+      type: object
+      properties:
+        incomeName:
+          type: string
+        incomeType:
+          $ref: '#/components/schemas/IncomeType'
+        specifiedOccurrences:
+          type: array
+          items:
+            $ref: '#/components/schemas/SpecifiedOccurrence'
+      description: A transport object that represents an income.
+    BaseFixedExpense:
+      type: object
+      properties:
+        expenseName:
+          type: string
+        value:
+          type: number
+          format: int64;
+        expenseType:
+          $ref: '#/components/schemas/ExpenseType'
+        expenseOccurrence:
+          $ref: '#/components/schemas/Occurrence'
+      description: A transport object that represents an expense.
+    BaseFixedIncome:
+      type: object
+      properties:
+        incomeName:
+          type: string
+        incomeValue:
+          type: number
+          format: double
+        incomeType:
+          $ref: '#/components/schemas/IncomeType'
+        incomeOccurrence:
+          $ref: '#/components/schemas/Occurrence'
+      description: A transport object that represents an income.
+    CreateCustomIncomeRequest:
+      type: object
+      description: A transport object that carries the details for creating a new
+        fixed income.
+      allOf:
+      - $ref: '#/components/schemas/BaseCustomIncome'
+    CreateCustomIncomeResponse:
+      type: object
+      description: A transport object that carries the details for a newly created
+        custom income.
+      allOf:
+      - $ref: '#/components/schemas/base-custom-income'
+    CreateFixedIncomeRequest:
+      type: object
+      description: A transport object that carries the details for creating a new
+        fixed income.
+      allOf:
+      - $ref: '#/components/schemas/BaseFixedIncome'
+    CreateFixedIncomeResponse:
+      type: object
+      description: A transport object that carries the details for a newly created
+        fixed income.
+      allOf:
+      - $ref: '#/components/schemas/base-fixed-income'
+    ExpenseType:
+      type: string
+      description: Defines the type of an income
+      enum:
+      - RENT
+      - MORTGAGE
+      - TAX
+      - GROCERIES
+      - LOAN
+      - INSURANCE
+      - VACATION
+      - OTHER
+    IncomeType:
+      type: string
+      description: Defines the type of an income
+      enum:
+      - SALARY
+      - DIVIDEND
+      - RENT
+      - INTEREST
+      - OTHER
+    Occurrence:
+      type: string
+      description: Defines the occurrence of an income
+      enum:
+      - DAILY
+      - WEEKLY
+      - MONTHLY
+      - YEARLY
+      - QUARTERLY
+      - CUSTOM
+    SpecifiedOccurrence:
+      type: object
+      properties:
+        value:
+          type: number
+          format: double
+        occurringOn:
+          type: string
+          description: "A UTC, ISO8601 compliant date & time"
+          example: 2022-12-12 18:00:00:00.000
+      description: Defines the attributes of a given occurrence when the occurence
+        type of an income/expense is CUSTOM
+    base-custom-income:
+      type: object
+    base-fixed-income:
+      type: object
